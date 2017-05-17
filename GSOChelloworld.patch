@@ -1,0 +1,33 @@
+From fdad7195e25076b1d7587437fadcbf66fa209ffb Mon Sep 17 00:00:00 2001
+From: Sichen Zhao <1473996754@qq.com>
+Date: Thu, 16 Mar 2017 10:30:23 +0800
+Subject: [PATCH] GSOC 2017 hello world patch
+
+---
+ testsuites/samples/hello/init.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/testsuites/samples/hello/init.c b/testsuites/samples/hello/init.c
+index a2d6c30..5f35516 100644
+--- a/testsuites/samples/hello/init.c
++++ b/testsuites/samples/hello/init.c
+@@ -29,11 +29,11 @@ rtems_task Init(
+   rtems_task_argument ignored
+ )
+ {
+-  rtems_print_printer_printf(&rtems_test_printer);
+-  rtems_test_begin();
+-  printf( "Hello World\n" );
+-  rtems_test_end();
+-  exit( 0 );
++  printf( "\n\n*** GSOC 2017 HELLO WORLD TEST ***\n" );
++  printf( "This is Sichen Zhao's Hello World\n" );
++  printf( "Welcome to RTEMS and Google Summer of Code 2017\n" );
++  printf( "*** END OF GSOC 2017 HELLO WORLD TEST ***\n" );
++   exit( 0 );
+ }
+ 
+ 
+-- 
+2.7.4
+

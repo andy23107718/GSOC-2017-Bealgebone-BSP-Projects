@@ -1,0 +1,61 @@
+--- /home/c/development/rtems/rtems-src/cpukit/dev/i2c/eeprom.c	2016-09-19 20:13:33.484638536 +0800
++++ /home/c/development/rtems/rtems-s/cpukit/dev/i2c/eeprom.c	2017-03-13 19:03:02.291729218 +0800
+@@ -55,6 +55,7 @@
+   off_t offset
+ )
+ {
++
+   eeprom *dev = (eeprom *) base;
+   off_t avail = dev->size - offset;
+   uint32_t off = (uint32_t) offset;
+@@ -86,6 +87,17 @@
+       (uint8_t) (off >> 16),
+       (uint8_t) (off >> 24)
+     };
++
++    i2c_msg msgs[1] = {
++        {
++        .addr = i2c_addr,
++        .flags = I2C_M_RD,
++        .buf = in,
++        .len = cur
++      }
++    };
++    
++    /*
+     i2c_msg msgs[2] = {
+       {
+         .addr = i2c_addr,
+@@ -99,14 +111,22 @@
+         .len = cur
+       }
+     };
++    
++
++    */
+     int err;
++    
++    
+ 
+     err = i2c_bus_transfer(dev->base.bus, &msgs[0], RTEMS_ARRAY_SIZE(msgs));
++
++    
+     if (err != 0) {
+       return err;
+     }
+-
++  
+     todo -= cur;
++
+     off += cur;
+     in += cur;
+   }
+@@ -236,7 +256,7 @@
+   }
+ 
+   if (program_timeout_in_ms == 0) {
+-    program_timeout_in_ms = 1000;
++    program_timeout_in_ms = 5000;
+   }
+ 
+   dev = (eeprom *)

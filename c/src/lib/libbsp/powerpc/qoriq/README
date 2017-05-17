@@ -1,0 +1,18 @@
+Board support package for the Freescale QorIQ platform:
+
+  http://en.wikipedia.org/wiki/QorIQ
+
+Boards known to work P1020RDB, MVME2500, T2080RDB and T4240RDB.
+
+Boot via U-Boot and FDT support is mandatory.  Use
+
+  mkimage -A ppc -O linux -T kernel -a 0x4000 -e 0x4000 -n RTEMS -d app.bin.gz app.img
+
+to create a bootable image.  You must use the "linux" image type to enable the
+dynamic FDT adjustment by U-Boot.  Boot it for example via the
+
+  tftp 1000000 app.img
+  tftp c00000 p1020rdb.dtb
+  bootm 1000000 - c00000
+
+U-Boot commands.
